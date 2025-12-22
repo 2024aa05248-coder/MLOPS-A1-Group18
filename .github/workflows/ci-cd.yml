@@ -142,6 +142,12 @@ jobs:
         python Part1/dataset_download_script/download_data.py
         python Part1/src/data_preprocess.py
     
+    - name: Clean MLflow artifacts
+      run: |
+        rm -f mlflow.db
+        rm -rf mlruns/
+        rm -rf Part3/mlruns/
+    
     - name: Train models (Part 2)
       run: |
         python Part2/src/train_models.py

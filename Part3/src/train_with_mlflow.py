@@ -125,8 +125,10 @@ def log_model_run(name: str, base_estimator, X, y, paths: Dict[str, Path]) -> Di
 def main() -> int:
     paths = get_paths()
 
-    # MLflow config
-    mlflow.set_tracking_uri(f"file://{paths['mlruns'].resolve()}")
+    # MLflow config - use relative path to avoid cross-platform issues
+    mlruns_path = paths['mlruns']
+    # Convert to URI format with forward slashes
+    mlflow.set_tracking_uri(f"file://{str(mlruns_path).replace(chr(92), '/')}")
     mlflow.set_experiment("HeartDisease-MLflow")
 
     # Data
