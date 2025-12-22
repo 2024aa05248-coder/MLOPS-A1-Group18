@@ -10,7 +10,7 @@
 
 ## Contents
 
-### 📄 Documentation
+### Documentation
 
 1. **FINAL_REPORT.md** - Comprehensive 10-page report covering:
    - Executive summary
@@ -48,7 +48,7 @@
    - Quick demo (5 min) alternative
    - Video recording tips
 
-### 📊 Diagrams
+### Diagrams
 
 Located in `diagrams/` folder:
 - System architecture diagram
@@ -57,7 +57,7 @@ Located in `diagrams/` folder:
 - Kubernetes deployment architecture
 - Monitoring setup diagram
 
-### 📸 Screenshots
+### Screenshots
 
 Located in `screenshots/` folder:
 
@@ -73,7 +73,7 @@ Located in `screenshots/` folder:
 9. Prometheus metrics
 10. Grafana dashboards
 
-### 🎥 Demo
+### Demo
 
 Located in `demo/` folder:
 - Demo script
@@ -85,48 +85,48 @@ Located in `demo/` folder:
 
 ### Achievements
 
-✅ **Part 1**: Data Acquisition & EDA (5 marks)
+**Part 1**: Data Acquisition & EDA (5 marks)
 - Automated dataset download
 - Data cleaning and preprocessing
 - Professional EDA visualizations
 
-✅ **Part 2**: Feature Engineering & Model Development (8 marks)
+**Part 2**: Feature Engineering & Model Development (8 marks)
 - Two models trained (Logistic Regression, Random Forest)
 - Hyperparameter tuning with GridSearchCV
 - 91.84% ROC-AUC achieved
 
-✅ **Part 3**: Experiment Tracking (5 marks)
+**Part 3**: Experiment Tracking (5 marks)
 - MLflow integration
 - Parameters, metrics, and artifacts logged
 - Model registry
 
-✅ **Part 4**: Model Packaging & Reproducibility (7 marks)
+**Part 4**: Model Packaging & Reproducibility (7 marks)
 - Joblib and MLflow model formats
 - Complete preprocessing pipeline
 - Schema and metadata
 
-✅ **Part 5**: CI/CD Pipeline & Testing (8 marks)
+**Part 5**: CI/CD Pipeline & Testing (8 marks)
 - 40 unit tests with pytest
 - GitHub Actions workflow
 - Automated linting and testing
 
-✅ **Part 6**: Model Containerization (5 marks)
+**Part 6**: Model Containerization (5 marks)
 - Docker image with FastAPI
 - /predict endpoint
 - Health checks and monitoring
 
-✅ **Part 7**: Production Deployment (7 marks)
+**Part 7**: Production Deployment (7 marks)
 - Kubernetes manifests
 - Auto-scaling (HPA)
 - LoadBalancer service
 - Helm chart
 
-✅ **Part 8**: Monitoring & Logging (3 marks)
+**Part 8**: Monitoring & Logging (3 marks)
 - Comprehensive logging
 - Prometheus metrics
 - Grafana dashboards
 
-✅ **Part 9**: Documentation & Reporting (2 marks)
+**Part 9**: Documentation & Reporting (2 marks)
 - 10-page final report
 - Setup instructions
 - Demo script
@@ -177,7 +177,7 @@ Located in `demo/` folder:
 
 ## Deliverables Checklist
 
-### Code Repository ✅
+### Code Repository
 - [x] Complete source code for all parts
 - [x] Dockerfile and docker-compose files
 - [x] Kubernetes manifests
@@ -185,27 +185,27 @@ Located in `demo/` folder:
 - [x] Test suite
 - [x] Requirements.txt
 
-### Documentation ✅
+### Documentation
 - [x] Final report (10+ pages)
 - [x] Setup instructions
 - [x] Demo script
 - [x] Individual README files for each part
 - [x] Architecture diagrams
 
-### Artifacts ✅
+### Artifacts
 - [x] Trained models (joblib and MLflow formats)
 - [x] Model metrics and evaluation results
 - [x] EDA visualizations
 - [x] ROC curves and confusion matrices
 - [x] MLflow tracking data
 
-### Deployment ✅
+### Deployment
 - [x] Docker image buildable and runnable
 - [x] Kubernetes manifests deployable
 - [x] API accessible and functional
 - [x] Monitoring stack operational
 
-### Evidence ✅
+### Evidence
 - [x] Screenshots of all components
 - [x] CI/CD pipeline run logs
 - [x] API test results
@@ -308,16 +308,16 @@ Before submitting, ensure:
 
 | Part | Component | Marks | Status |
 |------|-----------|-------|--------|
-| 1 | Data Acquisition & EDA | 5 | ✅ Complete |
-| 2 | Feature Engineering & Models | 8 | ✅ Complete |
-| 3 | Experiment Tracking | 5 | ✅ Complete |
-| 4 | Model Packaging | 7 | ✅ Complete |
-| 5 | CI/CD & Testing | 8 | ✅ Complete |
-| 6 | Containerization | 5 | ✅ Complete |
-| 7 | Production Deployment | 7 | ✅ Complete |
-| 8 | Monitoring & Logging | 3 | ✅ Complete |
-| 9 | Documentation & Reporting | 2 | ✅ Complete |
-| **Total** | | **50** | **✅ Complete** |
+| 1 | Data Acquisition & EDA | 5 | Complete |
+| 2 | Feature Engineering & Models | 8 | Complete |
+| 3 | Experiment Tracking | 5 | Complete |
+| 4 | Model Packaging | 7 | Complete |
+| 5 | CI/CD & Testing | 8 | Complete |
+| 6 | Containerization | 5 | Complete |
+| 7 | Production Deployment | 7 | Complete |
+| 8 | Monitoring & Logging | 3 | Complete |
+| 9 | Documentation & Reporting | 2 | Complete |
+| **Total** | | **50** | **Complete** |
 
 ## Contact and Support
 
@@ -349,7 +349,7 @@ After completing this project:
 
 ---
 
-**Project Status**: ✅ Complete and Production-Ready
+**Project Status**: Complete and Production-Ready
 
 **Last Updated**: December 2025
 

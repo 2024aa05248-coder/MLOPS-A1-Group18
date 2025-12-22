@@ -11,10 +11,10 @@ This script provides a step-by-step demonstration of the complete MLOps pipeline
 ## Demo Preparation
 
 ### Before Starting
-1. ✅ Complete setup (all parts 1-4 trained and packaged)
-2. ✅ Docker installed and running
-3. ✅ Terminal/command prompt ready
-4. ✅ Browser open for API docs and monitoring
+1. Complete setup (all parts 1-4 trained and packaged)
+2. Docker installed and running
+3. Terminal/command prompt ready
+4. Browser open for API docs and monitoring
 
 ### Quick Setup Check
 ```bash
@@ -333,14 +333,14 @@ kubectl get hpa -n mlops-heart-disease
 **Script**:
 > "Key achievements of this project:
 > 
-> ✅ **High Performance**: 91.84% ROC-AUC on heart disease prediction
-> ✅ **Fully Automated**: CI/CD pipeline from code to deployment
-> ✅ **Production Ready**: Containerized, scalable, monitored
-> ✅ **Reproducible**: Complete experiment tracking and versioning
-> ✅ **Well Tested**: 40 unit tests with good coverage
-> ✅ **Observable**: Comprehensive logging and metrics
-> ✅ **Scalable**: Auto-scaling from 2-10 pods based on load
-> ✅ **Documented**: Extensive documentation and runbooks
+> **High Performance**: 91.84% ROC-AUC on heart disease prediction
+> **Fully Automated**: CI/CD pipeline from code to deployment
+> **Production Ready**: Containerized, scalable, monitored
+> **Reproducible**: Complete experiment tracking and versioning
+> **Well Tested**: 40 unit tests with good coverage
+> **Observable**: Comprehensive logging and metrics
+> **Scalable**: Auto-scaling from 2-10 pods based on load
+> **Documented**: Extensive documentation and runbooks
 > 
 > This system can handle real-world production traffic and serves as a 
 > template for other ML projects."
@@ -383,36 +383,36 @@ pkill -f "mlflow ui"
 ## Demo Tips
 
 ### Preparation
-- ✅ Run through the demo once before presenting
-- ✅ Have all terminals and browsers pre-positioned
-- ✅ Ensure stable internet connection
-- ✅ Have backup screenshots in case of issues
-- ✅ Time yourself to stay within limits
+- Run through the demo once before presenting
+- Have all terminals and browsers pre-positioned
+- Ensure stable internet connection
+- Have backup screenshots in case of issues
+- Time yourself to stay within limits
 
 ### During Demo
-- 🎯 Focus on key features, don't get lost in details
-- 🎯 Explain WHY not just WHAT (e.g., why MLflow, why Kubernetes)
-- 🎯 Show real outputs, not just code
-- 🎯 Highlight production-readiness aspects
-- 🎯 Connect technical features to business value
+- Focus on key features, don't get lost in details
+- Explain WHY not just WHAT (e.g., why MLflow, why Kubernetes)
+- Show real outputs, not just code
+- Highlight production-readiness aspects
+- Connect technical features to business value
 
 ### Handling Issues
-- 🔧 If something fails, have screenshots ready
-- 🔧 Explain what SHOULD happen
-- 🔧 Move on quickly, don't debug live
-- 🔧 Acknowledge issues professionally
+- If something fails, have screenshots ready
+- Explain what SHOULD happen
+- Move on quickly, don't debug live
+- Acknowledge issues professionally
 
 ### Time Management
-- ⏱️ Introduction: 1 min
-- ⏱️ Data & Training: 2 min
-- ⏱️ Experiment Tracking: 2 min
-- ⏱️ Testing & CI/CD: 2 min
-- ⏱️ API Deployment: 3 min
-- ⏱️ Monitoring: 2 min
-- ⏱️ Kubernetes: 2 min (optional)
-- ⏱️ Architecture: 1 min
-- ⏱️ Wrap-up: 1 min
-- ⏱️ Buffer: 2 min
+- Introduction: 1 min
+- Data & Training: 2 min
+- Experiment Tracking: 2 min
+- Testing & CI/CD: 2 min
+- API Deployment: 3 min
+- Monitoring: 2 min
+- Kubernetes: 2 min (optional)
+- Architecture: 1 min
+- Wrap-up: 1 min
+- Buffer: 2 min
 
 **Total**: 15 minutes (18 with Kubernetes)
 

@@ -6,23 +6,23 @@
 [![Docker](https://img.shields.io/badge/Docker-containerized-blue)](https://www.docker.com/)
 [![Kubernetes](https://img.shields.io/badge/Kubernetes-ready-blue)](https://kubernetes.io/)
 
-## 🎯 Project Overview
+## Project Overview
 
 A complete MLOps pipeline for heart disease prediction using the UCI Heart Disease dataset. This project demonstrates end-to-end machine learning workflow from data acquisition to production deployment with comprehensive monitoring.
 
 ### Key Features
 
-- ✅ **High Performance**: 91.84% ROC-AUC on heart disease prediction
-- ✅ **Fully Automated**: CI/CD pipeline with GitHub Actions
-- ✅ **Production Ready**: Docker containerization + Kubernetes orchestration
-- ✅ **Experiment Tracking**: MLflow integration for reproducibility
-- ✅ **Comprehensive Testing**: 40 unit tests with pytest
-- ✅ **Real-time Monitoring**: Prometheus metrics + Grafana dashboards
-- ✅ **Well Documented**: Extensive documentation and guides
+- **High Performance**: 91.84% ROC-AUC on heart disease prediction
+- **Fully Automated**: CI/CD pipeline with GitHub Actions
+- **Production Ready**: Docker containerization + Kubernetes orchestration
+- **Experiment Tracking**: MLflow integration for reproducibility
+- **Comprehensive Testing**: 40 unit tests with pytest
+- **Real-time Monitoring**: Prometheus metrics + Grafana dashboards
+- **Well Documented**: Extensive documentation and guides
 
 ---
 
-## 📊 Quick Stats
+## Quick Stats
 
 | Metric | Value |
 |--------|-------|
@@ -34,7 +34,7 @@ A complete MLOps pipeline for heart disease prediction using the UCI Heart Disea
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -104,7 +104,7 @@ curl http://localhost:8000/health
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 MLOP-Assign/
@@ -126,7 +126,7 @@ Each part has its own README with detailed instructions.
 
 ---
 
-## 🔄 Pipeline Workflow
+## Pipeline Workflow
 
 ### Part 1: Data Acquisition & EDA
 
@@ -211,7 +211,7 @@ See `Part9/docs/` for comprehensive documentation including:
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ```bash
 # Run all tests
@@ -227,7 +227,7 @@ pytest tests/test_model.py -v
 
 ---
 
-## 📈 Model Performance
+## Model Performance
 
 ### Logistic Regression
 - Accuracy: 85.49% ± 4.18%
@@ -239,11 +239,11 @@ pytest tests/test_model.py -v
 - Accuracy: 82.84% ± 3.20%
 - Precision: 83.42% ± 4.59%
 - Recall: 78.39% ± 6.10%
-- **ROC-AUC: 91.84% ± 1.79%** ✅
+- **ROC-AUC: 91.84% ± 1.79%**
 
 ---
 
-## 🔧 Technology Stack
+## Technology Stack
 
 ### ML & Data
 - scikit-learn, pandas, numpy, scipy
@@ -267,7 +267,7 @@ pytest tests/test_model.py -v
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 ### Quick Links
 - [Final Report](Part9/docs/FINAL_REPORT.md) - Comprehensive 10-page report
@@ -288,7 +288,7 @@ pytest tests/test_model.py -v
 
 ---
 
-## 🎬 Demo
+## Demo
 
 For a live demonstration:
 
@@ -299,7 +299,7 @@ For a live demonstration:
 
 ---
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Common Issues
 
@@ -325,7 +325,7 @@ See [Setup Instructions](Part9/docs/SETUP_INSTRUCTIONS.md) for more troubleshoot
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 This is an academic project for MLOps coursework. For questions or improvements:
 
@@ -335,13 +335,13 @@ This is an academic project for MLOps coursework. For questions or improvements:
 
 ---
 
-## 📄 License
+## License
 
 This project is for educational purposes as part of MLOps coursework.
 
 ---
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - **Dataset**: UCI Machine Learning Repository
 - **Libraries**: scikit-learn, MLflow, FastAPI, and all open-source contributors
@@ -350,7 +350,7 @@ This project is for educational purposes as part of MLOps coursework.
 
 ---
 
-## 📞 Contact
+## Contact
 
 For questions about this project:
 - Check the [Final Report](Part9/docs/FINAL_REPORT.md)
@@ -359,14 +359,14 @@ For questions about this project:
 
 ---
 
-## ✅ Project Status
+## Project Status
 
-**Status**: ✅ Complete and Production-Ready  
+**Status**: Complete and Production-Ready  
 **Last Updated**: December 2025  
 **Version**: 1.0  
 **Total Marks**: 50/50
 
 ---
 
-**Built with ❤️ for MLOps Excellence**
+**Built with dedication for MLOps Excellence**
 

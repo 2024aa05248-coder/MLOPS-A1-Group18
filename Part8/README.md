@@ -253,13 +253,13 @@ For production, use centralized logging:
 
 ### 4. Monitoring Checklist
 
-- ✅ Request rate and latency
-- ✅ Error rate and types
-- ✅ Prediction distribution
-- ✅ Resource usage (CPU, memory)
-- ✅ Model performance metrics
-- ✅ Health check status
-- ✅ Active connections
+- Request rate and latency
+- Error rate and types
+- Prediction distribution
+- Resource usage (CPU, memory)
+- Model performance metrics
+- Health check status
+- Active connections
 
 ## Troubleshooting
 

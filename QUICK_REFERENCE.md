@@ -5,7 +5,7 @@
 
 ---
 
-## 🚀 Quick Start Commands
+## Quick Start Commands
 
 ### Complete Pipeline (Fresh Setup)
 ```bash
@@ -31,7 +31,7 @@ cd Part6/src && python app.py
 
 ---
 
-## 📂 Important File Locations
+## Important File Locations
 
 ### Data Files
 ```
@@ -65,7 +65,7 @@ Part2/outputs/plots/rf_confusion_matrix.png      # Confusion matrix
 
 ---
 
-## 🧪 Testing Commands
+## Testing Commands
 
 ```bash
 # Run all tests
@@ -83,7 +83,7 @@ pytest tests/test_model.py::TestModelTraining::test_logistic_regression_training
 
 ---
 
-## 🐳 Docker Commands
+## Docker Commands
 
 ```bash
 # Build image
@@ -107,7 +107,7 @@ docker-compose -f docker-compose-monitoring.yml down
 
 ---
 
-## ☸️ Kubernetes Commands
+## Kubernetes Commands
 
 ```bash
 # Deploy
@@ -130,7 +130,7 @@ cd Part7 && ./undeploy.sh
 
 ---
 
-## 🔍 API Endpoints
+## API Endpoints
 
 ### Base URL
 ```
@@ -166,7 +166,7 @@ curl http://localhost:8000/metrics
 
 ---
 
-## 📊 MLflow Commands
+## MLflow Commands
 
 ```bash
 # Start MLflow UI
@@ -178,7 +178,7 @@ mlflow ui --backend-store-uri file://$(pwd)/Part3/mlruns
 
 ---
 
-## 📈 Monitoring URLs
+## Monitoring URLs
 
 ```
 API:        http://localhost:8000
@@ -190,7 +190,7 @@ Grafana:    http://localhost:3000  (admin/admin)
 
 ---
 
-## 🔧 Troubleshooting Commands
+## Troubleshooting Commands
 
 ### Check if model exists
 ```bash
@@ -222,7 +222,7 @@ open htmlcov/index.html  # or start htmlcov/index.html on Windows
 
 ---
 
-## 📝 Common File Paths
+## Common File Paths
 
 ### Configuration Files
 ```
@@ -249,7 +249,7 @@ Part9/screenshots/SCREENSHOT_GUIDE.md            # Screenshot guide
 
 ---
 
-## 🎯 Key Metrics
+## Key Metrics
 
 ### Model Performance
 - **ROC-AUC**: 91.84%
@@ -270,7 +270,7 @@ Part9/screenshots/SCREENSHOT_GUIDE.md            # Screenshot guide
 
 ---
 
-## 🐛 Common Issues & Solutions
+## Common Issues & Solutions
 
 ### Issue: Model not found
 ```bash
@@ -309,7 +309,7 @@ minikube image load heart-disease-api:latest
 
 ---
 
-## 📚 Documentation Quick Links
+## Documentation Quick Links
 
 - [Final Report](Part9/docs/FINAL_REPORT.md)
 - [Setup Instructions](Part9/docs/SETUP_INSTRUCTIONS.md)
@@ -319,7 +319,7 @@ minikube image load heart-disease-api:latest
 
 ---
 
-## 🎬 Demo Flow (10 minutes)
+## Demo Flow (10 minutes)
 
 1. **Introduction** (1 min) - Project overview
 2. **Data & Training** (2 min) - Show data pipeline and model metrics
@@ -332,7 +332,7 @@ minikube image load heart-disease-api:latest
 
 ---
 
-## ✅ Pre-Submission Checklist
+## Pre-Submission Checklist
 
 - [ ] All parts 1-9 complete
 - [ ] All tests passing
@@ -347,7 +347,7 @@ minikube image load heart-disease-api:latest
 
 ---
 
-## 📞 Getting Help
+## Getting Help
 
 1. Check [Setup Instructions](Part9/docs/SETUP_INSTRUCTIONS.md)
 2. Review [Final Report](Part9/docs/FINAL_REPORT.md)
@@ -357,5 +357,5 @@ minikube image load heart-disease-api:latest
 ---
 
 **Last Updated**: December 22, 2025  
-**Status**: ✅ Complete and Ready for Submission
+**Status**: Complete and Ready for Submission
 

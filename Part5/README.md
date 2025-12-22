@@ -60,16 +60,16 @@ Located at `.github/workflows/ci-cd.yml`
 ## Test Coverage
 
 The test suite covers:
-- ✅ Data preprocessing and cleaning
-- ✅ Missing value handling
-- ✅ Feature engineering pipelines
-- ✅ Model training (Logistic Regression, Random Forest)
-- ✅ Cross-validation
-- ✅ Metrics calculation (accuracy, precision, recall, ROC-AUC)
-- ✅ Model persistence (save/load)
-- ✅ Inference pipeline
-- ✅ Input validation
-- ✅ Output format verification
+- Data preprocessing and cleaning
+- Missing value handling
+- Feature engineering pipelines
+- Model training (Logistic Regression, Random Forest)
+- Cross-validation
+- Metrics calculation (accuracy, precision, recall, ROC-AUC)
+- Model persistence (save/load)
+- Inference pipeline
+- Input validation
+- Output format verification
 
 ## Prerequisites
 

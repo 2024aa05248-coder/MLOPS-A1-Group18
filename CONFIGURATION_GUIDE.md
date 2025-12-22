@@ -5,7 +5,7 @@ This guide will help you configure all necessary values and run the complete pro
 
 ---
 
-## 📝 **Step 1: GitHub Repository Setup**
+## Step 1: GitHub Repository Setup
 
 ### 1.1 Create GitHub Repository
 
@@ -65,7 +65,7 @@ git push -u origin main
 
 ---
 
-## 🐳 **Step 2: Docker Configuration**
+## Step 2: Docker Configuration
 
 ### 2.1 No Changes Needed!
 
@@ -99,7 +99,7 @@ image: YOUR_DOCKERHUB_USERNAME/heart-disease-api:latest
 
 ---
 
-## ⚙️ **Step 3: Configuration Values Summary**
+## Step 3: Configuration Values Summary
 
 ### Values to Replace
 
@@ -119,7 +119,7 @@ image: YOUR_DOCKERHUB_USERNAME/heart-disease-api:latest
 
 ---
 
-## 🚀 **Step 4: How to Run the Complete Project**
+## Step 4: How to Run the Complete Project
 
 ### Option A: Complete Fresh Setup (Recommended for First Time)
 
@@ -284,7 +284,7 @@ minikube stop
 
 ---
 
-## 🧪 **Step 5: Verify Everything Works**
+## Step 5: Verify Everything Works
 
 ### Quick Verification Checklist
 
@@ -314,11 +314,11 @@ docker stop test-api
 docker rm test-api
 ```
 
-**All checks should pass!** ✅
+**All checks should pass!**
 
 ---
 
-## 📸 **Step 6: Capture Screenshots**
+## Step 6: Capture Screenshots
 
 Follow the guide in `Part9/screenshots/SCREENSHOT_GUIDE.md` to capture all 54 required screenshots.
 
@@ -336,7 +336,7 @@ Follow the guide in `Part9/screenshots/SCREENSHOT_GUIDE.md` to capture all 54 re
 
 ---
 
-## 🎬 **Step 7: Prepare for Demo**
+## Step 7: Prepare for Demo
 
 1. **Review Demo Script**: `Part9/demo/DEMO_SCRIPT.md`
 2. **Practice**: Run through the demo once
@@ -345,7 +345,7 @@ Follow the guide in `Part9/screenshots/SCREENSHOT_GUIDE.md` to capture all 54 re
 
 ---
 
-## 🐛 **Common Issues and Solutions**
+## Common Issues and Solutions
 
 ### Issue 1: Python packages not installing
 ```bash
@@ -393,7 +393,7 @@ pytest -v -s
 
 ---
 
-## 📋 **Pre-Submission Checklist**
+## Pre-Submission Checklist
 
 - [ ] GitHub repository created and code pushed
 - [ ] Repository URL updated in documentation
@@ -410,7 +410,7 @@ pytest -v -s
 
 ---
 
-## 🎯 **Quick Command Reference**
+## Quick Command Reference
 
 ### Essential Commands
 
@@ -440,7 +440,7 @@ mlflow ui --backend-store-uri file://$(pwd)/Part3/mlruns
 
 ---
 
-## 📞 **Need Help?**
+## Need Help?
 
 1. Check `QUICK_REFERENCE.md` for quick commands
 2. Review `Part9/docs/SETUP_INSTRUCTIONS.md` for detailed setup
@@ -449,17 +449,17 @@ mlflow ui --backend-store-uri file://$(pwd)/Part3/mlruns
 
 ---
 
-## ✅ **You're Ready!**
+## You're Ready!
 
 Once you've completed all steps above:
-1. ✅ Code is on GitHub
-2. ✅ All parts work locally
-3. ✅ Docker image builds and runs
-4. ✅ Tests pass
-5. ✅ Screenshots captured
-6. ✅ Demo prepared
+1. Code is on GitHub
+2. All parts work locally
+3. Docker image builds and runs
+4. Tests pass
+5. Screenshots captured
+6. Demo prepared
 
-**Your project is ready for submission!** 🎉
+**Your project is ready for submission!**
 
 ---
 

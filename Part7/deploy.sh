@@ -25,51 +25,51 @@ if ! kubectl cluster-info &> /dev/null; then
     exit 1
 fi
 
-echo "✓ kubectl is installed and cluster is accessible"
+echo "[OK] kubectl is installed and cluster is accessible"
 echo ""
 
 # Build Docker image
 echo "Step 1: Building Docker image..."
 cd ..
 docker build -t ${IMAGE_NAME}:${IMAGE_TAG} -f Part6/Dockerfile .
-echo "✓ Docker image built successfully"
+echo "[OK] Docker image built successfully"
 echo ""
 
 # For Minikube, load image into Minikube
 if kubectl config current-context | grep -q "minikube"; then
     echo "Step 2: Loading image into Minikube..."
     minikube image load ${IMAGE_NAME}:${IMAGE_TAG}
-    echo "✓ Image loaded into Minikube"
+    echo "[OK] Image loaded into Minikube"
     echo ""
 fi
 
 # Create namespace
 echo "Step 3: Creating namespace..."
 kubectl apply -f Part7/k8s/namespace.yaml
-echo "✓ Namespace created"
+echo "[OK] Namespace created"
 echo ""
 
 # Apply ConfigMap
 echo "Step 4: Applying ConfigMap..."
 kubectl apply -f Part7/k8s/configmap.yaml -n ${NAMESPACE}
-echo "✓ ConfigMap applied"
+echo "[OK] ConfigMap applied"
 echo ""
 
 # Deploy application
 echo "Step 5: Deploying application..."
 kubectl apply -f Part7/k8s/deployment.yaml -n ${NAMESPACE}
-echo "✓ Deployment created"
+echo "[OK] Deployment created"
 echo ""
 
 # Wait for deployment to be ready
 echo "Step 6: Waiting for deployment to be ready..."
 kubectl wait --for=condition=available --timeout=300s deployment/heart-disease-api -n ${NAMESPACE}
-echo "✓ Deployment is ready"
+echo "[OK] Deployment is ready"
 echo ""
 
 # Apply HPA (optional)
 echo "Step 7: Applying Horizontal Pod Autoscaler..."
-kubectl apply -f Part7/k8s/hpa.yaml -n ${NAMESPACE} || echo "⚠ HPA not applied (metrics-server may not be installed)"
+kubectl apply -f Part7/k8s/hpa.yaml -n ${NAMESPACE} || echo "[WARNING] HPA not applied (metrics-server may not be installed)"
 echo ""
 
 # Get deployment status
