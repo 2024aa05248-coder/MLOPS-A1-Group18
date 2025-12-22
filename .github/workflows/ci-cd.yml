@@ -97,14 +97,14 @@ jobs:
       continue-on-error: true
     
     - name: Upload test results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: test-results
         path: Part5/test-results.xml
     
     - name: Upload coverage report
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: always()
       with:
         name: coverage-report
@@ -155,7 +155,7 @@ jobs:
         python Part4/src/package_model.py
     
     - name: Upload trained models
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: trained-models
         path: |
@@ -164,7 +164,7 @@ jobs:
           Part4/models/
     
     - name: Upload metrics
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: model-metrics
         path: |
@@ -173,7 +173,7 @@ jobs:
           Part4/metrics/
     
     - name: Upload plots
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: model-plots
         path: |
@@ -182,7 +182,7 @@ jobs:
           Part3/outputs/plots/
     
     - name: Upload MLflow tracking
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: mlflow-runs
         path: Part3/mlruns/
@@ -211,5 +211,5 @@ jobs:
         echo "- **Testing:** ${{ needs.test.result }}" >> $GITHUB_STEP_SUMMARY
         echo "- **Training:** ${{ needs.train.result }}" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
-        echo "✅ Pipeline completed!" >> $GITHUB_STEP_SUMMARY
+        echo "Pipeline completed!" >> $GITHUB_STEP_SUMMARY
 
