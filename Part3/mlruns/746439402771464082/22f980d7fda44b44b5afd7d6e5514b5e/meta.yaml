@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/ayushgoyal/Downloads/MLOP-Assign/Part3/mlruns/746439402771464082/22f980d7fda44b44b5afd7d6e5514b5e/artifacts
+end_time: 1765649194385
+entry_point_name: ''
+experiment_id: '746439402771464082'
+lifecycle_stage: active
+run_id: 22f980d7fda44b44b5afd7d6e5514b5e
+run_name: Part3 Training
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1765649181181
+status: 3
+tags: []
+user_id: ayushgoyal

@@ -1,0 +1,10 @@
+artifact_location: file:///Users/ayushgoyal/Downloads/MLOP-Assign/Part3/mlruns/746439402771464082/models/m-576d60990b7048c9861437b2247e0420/artifacts
+creation_timestamp: 1765649182969
+experiment_id: '746439402771464082'
+last_updated_timestamp: 1765649184488
+model_id: m-576d60990b7048c9861437b2247e0420
+model_type: null
+name: model
+source_run_id: 4a735eee89be4a8386858b5d02e65ac9
+status: 2
+status_message: null

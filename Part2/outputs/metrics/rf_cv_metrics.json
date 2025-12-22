@@ -1,0 +1,62 @@
+{
+  "model": "random_forest",
+  "selection": {
+    "best_score": 0.9183707110790443,
+    "best_params": {
+      "clf__class_weight": "balanced",
+      "clf__max_depth": 5,
+      "clf__min_samples_leaf": 4,
+      "clf__n_estimators": 400,
+      "clf__random_state": 42
+    },
+    "cv_splits": 5,
+    "scoring": "roc_auc"
+  },
+  "cv_metrics": {
+    "cv_splits": 5,
+    "accuracy_mean": 0.8284153005464481,
+    "accuracy_std": 0.03198518947178988,
+    "precision_mean": 0.8341559989236151,
+    "precision_std": 0.04588141445092053,
+    "recall_mean": 0.7838624338624338,
+    "recall_std": 0.06097065790057156,
+    "roc_auc_mean": 0.9183707110790443,
+    "roc_auc_std": 0.017903785174367363,
+    "per_fold": {
+      "accuracy": [
+        0.8524590163934426,
+        0.7704918032786885,
+        0.8524590163934426,
+        0.8166666666666667,
+        0.85
+      ],
+      "precision": [
+        0.8275862068965517,
+        0.7692307692307693,
+        0.8275862068965517,
+        0.8333333333333334,
+        0.9130434782608695
+      ],
+      "recall": [
+        0.8571428571428571,
+        0.7142857142857143,
+        0.8571428571428571,
+        0.7407407407407407,
+        0.75
+      ],
+      "roc_auc": [
+        0.9523809523809523,
+        0.9036796536796536,
+        0.9036796536796537,
+        0.9147025813692481,
+        0.9174107142857143
+      ]
+    }
+  },
+  "oof_roc_auc": 0.9144586769608704,
+  "artifacts": {
+    "roc_plot": "/Users/ayushgoyal/Downloads/MLOP-Assign/Part2/outputs/plots/rf_roc_curve.png",
+    "confusion_matrix": "/Users/ayushgoyal/Downloads/MLOP-Assign/Part2/outputs/plots/rf_confusion_matrix.png",
+    "model_path": "/Users/ayushgoyal/Downloads/MLOP-Assign/Part2/outputs/models/rf_best.joblib"
+  }
+}

@@ -1,0 +1,54 @@
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.13.5
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.7.2
+is_signature_from_type_hint: false
+metadata:
+  metrics:
+    oof_roc_auc: 0.9144586769608704
+    roc_auc_mean: 0.9183707110790443
+  model_name: final_rf
+  selection:
+    best_params:
+      clf__class_weight: balanced
+      clf__max_depth: 5
+      clf__min_samples_leaf: 4
+      clf__n_estimators: 400
+      clf__random_state: 42
+    best_score: 0.9183707110790443
+    cv_splits: 5
+    scoring: roc_auc
+mlflow_version: 3.7.0
+model_id: null
+model_size_bytes: 1407283
+model_uuid: 37bef9f72d2f42d088c8ad527c299ad5
+prompts: null
+saved_input_example_info:
+  artifact_path: input_example.json
+  pandas_orient: split
+  serving_input_path: serving_input_example.json
+  type: dataframe
+signature:
+  inputs: '[{"type": "double", "name": "age", "required": true}, {"type": "double",
+    "name": "sex", "required": true}, {"type": "double", "name": "trestbps", "required":
+    true}, {"type": "double", "name": "chol", "required": true}, {"type": "double",
+    "name": "fbs", "required": true}, {"type": "double", "name": "thalach", "required":
+    true}, {"type": "double", "name": "exang", "required": true}, {"type": "double",
+    "name": "oldpeak", "required": true}, {"type": "double", "name": "ca", "required":
+    true}, {"type": "double", "name": "cp", "required": true}, {"type": "double",
+    "name": "restecg", "required": true}, {"type": "double", "name": "slope", "required":
+    true}, {"type": "double", "name": "thal", "required": true}]'
+  outputs: '[{"type": "double", "name": "proba", "required": true}]'
+  params: null
+type_hint_from_example: false
+utc_time_created: '2025-12-13 18:21:12.935938'
