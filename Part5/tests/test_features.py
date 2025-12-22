@@ -115,7 +115,7 @@ class TestFeaturePipeline:
         pipe = build_model_pipeline(LogisticRegression(max_iter=1000))
         pipe.fit(X, y)
         
-        X_transformed = pipe.named_steps['preprocessor'].transform(X)
+        X_transformed = pipe.named_steps['preprocess'].transform(X)
         assert X_transformed.shape[0] == len(X)
     
     def test_scaling_applied(self, sample_data):
@@ -129,7 +129,7 @@ class TestFeaturePipeline:
         pipe.fit(X, y)
         
         # Get transformed data
-        X_transformed = pipe.named_steps['preprocessor'].transform(X)
+        X_transformed = pipe.named_steps['preprocess'].transform(X)
         
         # Scaled features should have values roughly in [-3, 3] range for small samples
         # Just check that transformation happened
@@ -145,7 +145,7 @@ class TestFeaturePipeline:
         pipe = build_model_pipeline(LogisticRegression(max_iter=1000))
         pipe.fit(X, y)
         
-        feature_names = get_feature_names_after_fit(pipe.named_steps['preprocessor'])
+        feature_names = get_feature_names_after_fit(pipe)
         assert len(feature_names) > 0
         assert isinstance(feature_names, list)
 
