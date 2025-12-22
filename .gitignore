@@ -41,6 +41,12 @@ mlflow.db
 mlruns/
 mlartifacts/
 
+# Model outputs and artifacts
+Part2/outputs/
+Part3/outputs/
+Part4/models/
+Part4/metrics/
+
 # Jupyter
 .ipynb_checkpoints/
 
