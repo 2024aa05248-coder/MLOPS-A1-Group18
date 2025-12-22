@@ -83,6 +83,12 @@ jobs:
         python Part1/src/data_preprocess.py
       continue-on-error: true
     
+    - name: Train and package model for tests
+      run: |
+        python Part2/src/train_models.py
+        python Part4/src/package_model.py
+      continue-on-error: true
+    
     - name: Run tests with pytest
       run: |
         cd Part5
