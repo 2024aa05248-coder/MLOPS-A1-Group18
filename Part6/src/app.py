@@ -26,7 +26,14 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Add project root to path
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+# Handle both local development and Docker container paths
+if Path("/app/models/final_model.joblib").exists():
+    # Running in Docker container
+    PROJECT_ROOT = Path("/app")
+else:
+    # Running locally
+    PROJECT_ROOT = Path(__file__).resolve().parents[2]
+    
 sys.path.insert(0, str(PROJECT_ROOT))
 
 # Initialize FastAPI app
@@ -103,23 +110,34 @@ def load_model():
     """Load the trained model from Part4."""
     global model, model_metadata
     
-    model_path = PROJECT_ROOT / "Part4" / "models" / "final_model.joblib"
+    # Try Docker path first, then local path
+    docker_model_path = Path("/app/models/final_model.joblib")
+    local_model_path = PROJECT_ROOT / "Part4" / "models" / "final_model.joblib"
     
-    if not model_path.exists():
-        logger.error(f"Model not found at {model_path}")
-        raise FileNotFoundError(f"Model file not found: {model_path}")
+    if docker_model_path.exists():
+        model_path = docker_model_path
+        metadata_path = Path("/app/metrics/final_report.json")
+        logger.info("Using Docker container paths")
+    elif local_model_path.exists():
+        model_path = local_model_path
+        metadata_path = PROJECT_ROOT / "Part4" / "metrics" / "final_report.json"
+        logger.info("Using local development paths")
+    else:
+        logger.error(f"Model not found at {docker_model_path} or {local_model_path}")
+        raise FileNotFoundError(f"Model file not found in Docker or local paths")
     
     try:
         model = joblib.load(model_path)
         logger.info(f"Model loaded successfully from {model_path}")
         
         # Load metadata
-        metadata_path = PROJECT_ROOT / "Part4" / "metrics" / "final_report.json"
         if metadata_path.exists():
             import json
             with open(metadata_path, 'r') as f:
                 model_metadata = json.load(f)
             logger.info("Model metadata loaded successfully")
+        else:
+            logger.warning(f"Metadata file not found at {metadata_path}")
         
     except Exception as e:
         logger.error(f"Error loading model: {str(e)}")
