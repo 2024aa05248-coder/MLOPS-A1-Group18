@@ -125,10 +125,11 @@ def log_model_run(name: str, base_estimator, X, y, paths: Dict[str, Path]) -> Di
 def main() -> int:
     paths = get_paths()
 
-    # MLflow config - use relative path to avoid cross-platform issues
-    mlruns_path = paths['mlruns']
-    # Convert to URI format with forward slashes
-    mlflow.set_tracking_uri(f"file://{str(mlruns_path).replace(chr(92), '/')}")
+    # MLflow config - use absolute path directly (works on Windows and Linux)
+    mlruns_path = paths['mlruns'].resolve()
+    # On Windows, use the path directly without file:// prefix
+    # On Linux/Mac, MLflow handles it automatically
+    mlflow.set_tracking_uri(str(mlruns_path))
     mlflow.set_experiment("HeartDisease-MLflow")
 
     # Data
@@ -150,8 +151,8 @@ def main() -> int:
             log_model_run("rf", RandomForestClassifier(), X, y, paths)
 
     print("Part3 MLflow tracking complete.")
-    print(f"MLflow tracking URI: file://{paths['mlruns'].resolve()}")
-    print(f"To view UI: mlflow ui --backend-store-uri file://{paths['mlruns'].resolve()}")
+    print(f"MLflow tracking URI: {paths['mlruns'].resolve()}")
+    print(f"To view UI: mlflow ui --backend-store-uri {paths['mlruns'].resolve()}")
     return 0
 
 
