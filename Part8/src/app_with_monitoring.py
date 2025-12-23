@@ -463,11 +463,11 @@ async def global_exception_handler(request: Request, exc: Exception):
 
 if __name__ == "__main__":
     # Run the API server
+    # Pass app object directly instead of string to avoid double import
     uvicorn.run(
-        "app_with_monitoring:app",
+        app,
         host="0.0.0.0",
         port=8000,
-        reload=False,
         log_level="info"
     )
 
