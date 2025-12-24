@@ -36,7 +36,8 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Add project root to path
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+# In Docker container, the app is at /app/app.py, so PROJECT_ROOT is /app
+PROJECT_ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(PROJECT_ROOT))
 
 # Initialize FastAPI app
@@ -144,7 +145,8 @@ def load_model():
     global model, model_metadata
     
     start_time = time.time()
-    model_path = PROJECT_ROOT / "Part4" / "models" / "final_model.joblib"
+    # In Docker container, models are mounted at /app/models/
+    model_path = PROJECT_ROOT / "models" / "final_model.joblib"
     
     logger.info(f"Loading model from {model_path}")
     
@@ -158,8 +160,8 @@ def load_model():
         MODEL_LOAD_TIME.set(load_time)
         logger.info(f"Model loaded successfully in {load_time:.2f} seconds")
         
-        # Load metadata
-        metadata_path = PROJECT_ROOT / "Part4" / "metrics" / "final_report.json"
+        # Load metadata - in Docker container, metrics are mounted at /app/metrics/
+        metadata_path = PROJECT_ROOT / "metrics" / "final_report.json"
         if metadata_path.exists():
             with open(metadata_path, 'r') as f:
                 model_metadata = json.load(f)

@@ -34,13 +34,40 @@ A complete MLOps pipeline for heart disease prediction using the UCI Heart Disea
 
 ---
 
-## Quick Start
+## 🚀 Quick Start
+
+### **NEW: Complete Setup Guides Available!**
+
+Choose your path:
+
+#### Option 1: Automated Setup (Fastest) ⚡
+```powershell
+# Run everything automatically (Parts 1-4)
+.\run_all_parts.ps1
+```
+**Time:** 15-20 minutes
+
+#### Option 2: Step-by-Step Guide 📖
+```powershell
+# Follow the complete guide
+Get-Content COMPLETE_SETUP_GUIDE.md
+```
+**Time:** 60-100 minutes (includes learning)
+
+#### Option 3: Quick Reference 📋
+```powershell
+# Quick commands and checklist
+Get-Content QUICK_START.md
+```
+
+---
 
 ### Prerequisites
 
 - Python 3.9+
-- Docker (optional, for containerization)
-- kubectl (optional, for Kubernetes deployment)
+- Docker Desktop (with Kubernetes enabled)
+- Minikube
+- kubectl
 
 ### Installation
 
@@ -101,6 +128,19 @@ curl http://localhost:8000/health
 - **MLflow UI**: http://localhost:5000
 - **Prometheus**: http://localhost:9090
 - **Grafana**: http://localhost:3000
+
+---
+
+## 📚 Documentation Index
+
+| Document | Purpose | When to Use |
+|----------|---------|-------------|
+| **[QUICK_START.md](QUICK_START.md)** | Quick reference & commands | Start here! |
+| **[COMPLETE_SETUP_GUIDE.md](COMPLETE_SETUP_GUIDE.md)** | Full Parts 1-8 guide | Detailed instructions |
+| **[run_all_parts.ps1](run_all_parts.ps1)** | Automation script | Quick automated setup |
+| **[Part8/DEPLOYMENT_STEPS.md](Part8/DEPLOYMENT_STEPS.md)** | Steps 7 & 8 deployment | Kubernetes + Monitoring |
+| **[Part8/POWERSHELL_COMMANDS.md](Part8/POWERSHELL_COMMANDS.md)** | PowerShell syntax | Testing & commands |
+| **[Part8/SCREENSHOT_GUIDE.md](Part8/SCREENSHOT_GUIDE.md)** | Screenshot guide | Assignment submission |
 
 ---
 
