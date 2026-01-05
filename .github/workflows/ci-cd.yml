@@ -36,14 +36,21 @@ jobs:
     
     - name: Run flake8
       run: |
+        echo "=== Running flake8 linting ==="
         flake8 Part1 Part2 Part3 Part4 Part5 --count --max-line-length=120 \
-          --extend-ignore=E203,W503 --statistics --show-source
-      continue-on-error: true
+          --extend-ignore=E203,W503 --statistics --show-source || {
+          echo "ERROR: Flake8 found linting errors!"
+          exit 1
+        }
     
     - name: Check code formatting with black
       run: |
-        black --check Part1 Part2 Part3 Part4 Part5 --line-length=120
-      continue-on-error: true
+        echo "=== Checking code formatting with black ==="
+        black --check Part1 Part2 Part3 Part4 Part5 --line-length=120 || {
+          echo "ERROR: Black found formatting issues!"
+          echo "Run 'black Part1 Part2 Part3 Part4 Part5 --line-length=120' to fix"
+          exit 1
+        }
 
   test:
     name: Unit Tests
@@ -75,32 +82,51 @@ jobs:
     
     - name: Download dataset
       run: |
-        python Part1/dataset_download_script/download_data.py
-      continue-on-error: true
+        echo "=== Downloading dataset ==="
+        python Part1/dataset_download_script/download_data.py || {
+          echo "ERROR: Failed to download dataset!"
+          exit 1
+        }
     
     - name: Preprocess data
       run: |
-        python Part1/src/data_preprocess.py
-      continue-on-error: true
+        echo "=== Preprocessing data ==="
+        python Part1/src/data_preprocess.py || {
+          echo "ERROR: Failed to preprocess data!"
+          exit 1
+        }
     
     - name: Train and package model for tests
       run: |
-        python Part2/src/train_models.py
-        python Part4/src/package_model.py
-      continue-on-error: true
+        echo "=== Training and packaging model ==="
+        python Part2/src/train_models.py || {
+          echo "ERROR: Failed to train models!"
+          exit 1
+        }
+        python Part4/src/package_model.py || {
+          echo "ERROR: Failed to package model!"
+          exit 1
+        }
     
     - name: Run tests with pytest
       run: |
+        echo "=== Running unit tests ==="
         cd Part5
-        pytest -v --tb=short --junit-xml=test-results.xml
-      continue-on-error: false
+        pytest -v --tb=short --junit-xml=test-results.xml || {
+          echo "ERROR: Tests failed! Check logs above for details."
+          exit 1
+        }
     
     - name: Run tests with coverage
       run: |
+        echo "=== Running tests with coverage ==="
         cd Part5
         pytest --cov=../Part1 --cov=../Part2 --cov=../Part4 \
-          --cov-report=xml --cov-report=html --cov-report=term
-      continue-on-error: true
+          --cov-report=xml --cov-report=html --cov-report=term \
+          --cov-fail-under=50 || {
+          echo "ERROR: Coverage below threshold or tests failed!"
+          exit 1
+        }
     
     - name: Upload test results
       uses: actions/upload-artifact@v4
@@ -140,16 +166,25 @@ jobs:
     
     - name: Install dependencies
       run: |
+        echo "=== Installing dependencies ==="
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     
     - name: Download and preprocess data
       run: |
-        python Part1/dataset_download_script/download_data.py
-        python Part1/src/data_preprocess.py
+        echo "=== Downloading and preprocessing data ==="
+        python Part1/dataset_download_script/download_data.py || {
+          echo "ERROR: Failed to download dataset!"
+          exit 1
+        }
+        python Part1/src/data_preprocess.py || {
+          echo "ERROR: Failed to preprocess data!"
+          exit 1
+        }
     
     - name: Clean MLflow artifacts and model outputs
       run: |
+        echo "=== Cleaning artifacts ==="
         rm -f mlflow.db
         rm -rf mlruns/
         rm -rf Part3/mlruns/
@@ -160,15 +195,27 @@ jobs:
     
     - name: Train models (Part 2)
       run: |
-        python Part2/src/train_models.py
+        echo "=== Training models (Part 2) ==="
+        python Part2/src/train_models.py || {
+          echo "ERROR: Part 2 training failed!"
+          exit 1
+        }
     
     - name: Train with MLflow (Part 3)
       run: |
-        python Part3/src/train_with_mlflow.py
+        echo "=== Training with MLflow (Part 3) ==="
+        python Part3/src/train_with_mlflow.py || {
+          echo "ERROR: Part 3 MLflow training failed!"
+          exit 1
+        }
     
     - name: Package final model (Part 4)
       run: |
-        python Part4/src/package_model.py
+        echo "=== Packaging final model (Part 4) ==="
+        python Part4/src/package_model.py || {
+          echo "ERROR: Model packaging failed!"
+          exit 1
+        }
     
     - name: Upload trained models
       uses: actions/upload-artifact@v4
@@ -226,6 +273,19 @@ jobs:
         echo "- **Linting:** ${{ needs.lint.result }}" >> $GITHUB_STEP_SUMMARY
         echo "- **Testing:** ${{ needs.test.result }}" >> $GITHUB_STEP_SUMMARY
         echo "- **Training:** ${{ needs.train.result }}" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        
+        # Add failure details if any job failed
+        if [ "${{ needs.lint.result }}" = "failure" ]; then
+          echo "**ERROR: Linting failed** - Check flake8/black output" >> $GITHUB_STEP_SUMMARY
+        fi
+        if [ "${{ needs.test.result }}" = "failure" ]; then
+          echo "**ERROR: Tests failed** - Check pytest output and test-results artifact" >> $GITHUB_STEP_SUMMARY
+        fi
+        if [ "${{ needs.train.result }}" = "failure" ]; then
+          echo "**ERROR: Training failed** - Check training logs" >> $GITHUB_STEP_SUMMARY
+        fi
+        
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "Pipeline completed!" >> $GITHUB_STEP_SUMMARY
 
