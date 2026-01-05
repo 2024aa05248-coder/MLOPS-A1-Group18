@@ -34,15 +34,15 @@ jobs:
         python -m pip install --upgrade pip
         pip install flake8 black
     
-        - name: Run flake8
-        run: |
-          echo "=== Running flake8 linting ==="
-          flake8 Part1 Part2 Part3 Part4 Part5 --count --max-line-length=120 \
-            --extend-ignore=E203,W503,E265,E302,E402,E501,W291,W293,W391,E128 \
-            --statistics --show-source || {
-            echo "ERROR: Flake8 found linting errors!"
-            exit 1
-          }
+    - name: Run flake8
+      run: |
+        echo "=== Running flake8 linting ==="
+        flake8 Part1 Part2 Part3 Part4 Part5 --count --max-line-length=120 \
+          --extend-ignore=E203,W503,E265,E302,E402,E501,W291,W293,W391,E128 \
+          --statistics --show-source || {
+          echo "ERROR: Flake8 found linting errors!"
+          exit 1
+        }
     
     - name: Check code formatting with black
       run: |
