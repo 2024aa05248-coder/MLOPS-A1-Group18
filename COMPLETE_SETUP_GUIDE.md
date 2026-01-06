@@ -17,9 +17,7 @@ This guide provides step-by-step instructions to complete the entire MLOps assig
 - [Part 8: Full Monitoring Stack (Docker Compose)](#part-8-full-monitoring-stack-docker-compose)
 - [Monitoring Metrics Available](#monitoring-metrics-available)
 - [Cleanup Commands](#cleanup-commands)
-- [Quick Verification Checklist](#quick-verification-checklist)
 - [Troubleshooting](#troubleshooting)
-- [Architecture Overview](#architecture-overview)
 - [Key Files](#key-files)
 - [Success Indicators](#success-indicators)
 
@@ -819,14 +817,14 @@ docker-compose -f docker-compose-monitoring.yml up -d
 
 ## Success Indicators
 
-### Part 7 (Minikube)
+### Minikube Deployment
 
 - 3 pods running in Kubernetes
 - LoadBalancer service has external IP
 - API responds to `/health`
 - `/predict` returns expected JSON
 
-### Part 8 (Monitoring)
+### Monitoring
 
 - 3 containers (API, Prometheus, Grafana) are healthy
 - API logs each request

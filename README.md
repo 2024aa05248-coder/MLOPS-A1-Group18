@@ -149,7 +149,7 @@ Each part has its own README with detailed instructions.
 
 For a live demonstration:
 
-1. Follow the video link attached in the Final Report
+1. [Video Demo Link](https://drive.google.com/file/d/19yzjCln8NmNYE-vAxFNDRLpc_fbUCZ8q/view?usp=sharing)
 2. Duration: 28 minutes
 3. Covers all major components
 4. Includes talking points and commands
