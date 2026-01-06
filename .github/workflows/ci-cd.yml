@@ -1,4 +1,4 @@
-name: MLOps CI/CD Pipeline
+name: MLOPs CI/CD Pipeline
 
 on:
   push:
@@ -279,4 +279,3 @@ jobs:
         
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "Pipeline completed!" >> $GITHUB_STEP_SUMMARY
-
