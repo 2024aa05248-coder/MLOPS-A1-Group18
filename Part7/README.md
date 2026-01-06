@@ -419,32 +419,3 @@ kubectl delete namespace mlops-heart-disease
 minikube stop
 minikube delete
 ```
-
-## Architecture Diagram
-
-```
-                                    ┌─────────────────┐
-                                    │   LoadBalancer  │
-                                    │   (Service)     │
-                                    └────────┬────────┘
-                                             │
-                    ┌────────────────────────┼────────────────────────┐
-                    │                        │                        │
-              ┌─────▼─────┐           ┌─────▼─────┐           ┌─────▼─────┐
-              │   Pod 1   │           │   Pod 2   │           │   Pod 3   │
-              │  FastAPI  │           │  FastAPI  │           │  FastAPI  │
-              │   + Model │           │   + Model │           │   + Model │
-              └───────────┘           └───────────┘           └───────────┘
-                    │                        │                        │
-                    └────────────────────────┼────────────────────────┘
-                                             │
-                                    ┌────────▼────────┐
-                                    │  ConfigMap      │
-                                    │  (Configuration)│
-                                    └─────────────────┘
-```
-
-## Next Steps
-- Part 8: Monitoring & Logging with Prometheus and Grafana
-- Part 9: Documentation & Reporting
-

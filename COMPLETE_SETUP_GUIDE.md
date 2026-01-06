@@ -13,7 +13,15 @@ This guide provides step-by-step instructions to complete the entire MLOps assig
 - [Part 4: Model Packaging & Inference](#part-4-model-packaging--inference)
 - [Part 5: Testing (Optional)](#part-5-testing-optional)
 - [Part 6: API Development](#part-6-api-development)
-- [Part 7 & 8: Deployment & Monitoring](#part-7--8-deployment--monitoring)
+- [Part 7: Deploy to Minikube (Kubernetes)](#part-7-deploy-to-minikube-kubernetes)
+- [Part 8: Full Monitoring Stack (Docker Compose)](#part-8-full-monitoring-stack-docker-compose)
+- [Monitoring Metrics Available](#monitoring-metrics-available)
+- [Cleanup Commands](#cleanup-commands)
+- [Quick Verification Checklist](#quick-verification-checklist)
+- [Troubleshooting](#troubleshooting)
+- [Architecture Overview](#architecture-overview)
+- [Key Files](#key-files)
+- [Success Indicators](#success-indicators)
 
 ---
 
@@ -31,7 +39,7 @@ This guide provides step-by-step instructions to complete the entire MLOps assig
 **Step 1: Clone/Navigate to Project Directory**
 ```powershell
 cd "<path-to-your-project-directory>"
-# Example: cd "C:\Projects\MLOP-Assign"
+# Example: cd "C:\Projects\MLOPS-A1-Group18"
 ```
 
 **Step 2: Create Virtual Environment**
@@ -182,7 +190,8 @@ cd ..\Part3
 
 **Open a NEW terminal window** and run:
 ```powershell
-cd "C:\Users\ashmitad\Documents\Personal\Bits\SEMESTER 3\MLOPs\Assignment 1\MLOP-Assign\Part3"
+cd <PROJECT_DIRECTORY>\Part3
+# Example: cd C:\Projects\MLOPS-A1-Group18\Part3
 mlflow ui --port 5000
 ```
 
@@ -301,7 +310,7 @@ python src\infer.py --input test_patient.csv --output my_predictions.csv
 
 ---
 
-## Part 5: Testing (Optional)
+## Part 5: Testing
 
 ### Objective
 Run unit tests to verify code quality.
@@ -349,7 +358,7 @@ python src\app.py
 ```
 
 **Expected Output:**
-```
+```text
 INFO:     Started server process
 INFO:     Uvicorn running on http://0.0.0.0:8000
 ```
@@ -408,204 +417,420 @@ docker rm heart-api
 
 ---
 
-## Part 7 & 8: Deployment & Monitoring
+## Part 7: Deploy to Minikube (Kubernetes)
 
-### Objective
-Deploy to Kubernetes (Minikube) and set up monitoring with Prometheus & Grafana.
+This part deploys the Heart Disease Prediction API to a local Kubernetes cluster (Minikube) using the Docker image built in Part 6.
 
-### ✅ Continue with Existing Documentation
+### Step 7.1: Build the Docker Image (if not already built)
 
-**Now proceed to:**
-- **Part8/DEPLOYMENT_STEPS.md** for complete Step 7 & 8 instructions
+From the project root:
 
-The Docker image you built in Part 6 will be used for:
-- **Step 7:** Kubernetes deployment on Minikube
-- **Step 8:** Monitoring stack with Docker Compose
+```powershell
+docker build -t heart-disease-api:latest -f Part6/Dockerfile .
+```
+
+### Step 7.2: Start Minikube
+
+```powershell
+minikube start --driver=docker
+```
+
+Wait 2-3 minutes for Minikube to fully start.
+
+### Step 7.3: Load Docker Image into Minikube
+
+```powershell
+minikube image load heart-disease-api:latest
+```
+
+Verify:
+
+```powershell
+minikube image ls | findstr heart-disease-api
+```
+
+### Step 7.4: Create Kubernetes Deployment
+
+Apply the deployment manifest:
+
+```powershell
+kubectl apply -f Part7/k8s/deployment.yaml
+```
+
+Expected output:
+```text
+deployment.apps/heart-disease-api created
+service/heart-disease-api-service created
+```
+
+### Step 7.5: Verify Deployment
+
+Check pods:
+
+```powershell
+kubectl get pods
+```
+
+After 1-2 minutes you should see all pods in `Running` state.
+
+Check deployment:
+
+```powershell
+kubectl get deployment heart-disease-api
+```
+
+Check service:
+
+```powershell
+kubectl get service heart-disease-api-service
+```
+
+### Step 7.6: Expose Service via Minikube Tunnel
+
+**Open a NEW terminal window** and run:
+
+```powershell
+minikube tunnel
+```
+
+Keep this terminal running.
+
+### Step 7.7: Get Service URL
+
+In your original terminal:
+
+```powershell
+kubectl get service heart-disease-api-service
+```
+
+Wait until `EXTERNAL-IP` is assigned.
+
+Or:
+
+```powershell
+minikube service heart-disease-api-service --url
+```
+
+Keep this terminal open.
+
+### Step 7.8: Test the Deployment
+
+Replace `<PORT>` with the port from the previous command.
+
+Health endpoint:
+
+```powershell
+Invoke-RestMethod -Uri "http://127.0.0.1:<PORT>/health"
+```
+
+Root endpoint:
+
+```powershell
+Invoke-RestMethod -Uri "http://127.0.0.1:<PORT>/"
+```
+
+Prediction:
+
+```powershell
+$body = @{
+    age=63; sex=1; cp=1; trestbps=145; chol=233; 
+    fbs=1; restecg=2; thalach=150; exang=0; 
+    oldpeak=2.3; slope=3; ca=0; thal=6
+} | ConvertTo-Json
+
+Invoke-RestMethod -Uri "http://127.0.0.1:<PORT>/predict" -Method Post -Body $body -ContentType "application/json"
+```
+
+### Step 7.9: Recommended Screenshots
+
+1. `kubectl get pods` - all 3 pods `Running`
+2. `kubectl get deployment` - deployment status
+3. `kubectl get service` - service with `EXTERNAL-IP`
+4. Browser at `http://<EXTERNAL-IP>/docs`
+5. Successful prediction response (browser/Postman)
+6. `kubectl describe deployment heart-disease-api`
 
 ---
 
-## Complete Workflow Summary
+## Part 8: Full Monitoring Stack (Docker Compose)
 
+This part runs the API with Prometheus and Grafana using Docker Compose.
+
+### Step 8.1: Stop Minikube (Optional)
+
+To free resources:
+
+```powershell
+# In the terminal running minikube tunnel, press Ctrl+C
+minikube stop
 ```
-Part 1: Data Preprocessing
-  ↓
-Part 2: Model Training (Logistic Regression + Random Forest)
-  ↓
-Part 3: MLflow Tracking (Experiment tracking + Model registry)
-  ↓
-Part 4: Model Packaging (Best model → Production format)
-  ↓
-Part 5: Testing (Unit tests + Coverage)
-  ↓
-Part 6: API Development (FastAPI + Docker)
-  ↓
-Part 7: Kubernetes Deployment (Minikube + LoadBalancer)
-  ↓
-Part 8: Monitoring (Prometheus + Grafana + Logging)
+
+### Step 8.2: Navigate to Part8 Directory
+
+```powershell
+cd Part8
 ```
+
+### Step 8.3: Start the Full Monitoring Stack
+
+```powershell
+docker-compose -f docker-compose-monitoring.yml up -d
+```
+
+This starts:
+- API on port 8000
+- Prometheus on port 9090
+- Grafana on port 3000
+
+### Step 8.4: Verify All Containers are Running
+
+```powershell
+docker-compose -f docker-compose-monitoring.yml ps
+```
+
+Check logs if needed:
+
+```powershell
+docker-compose -f docker-compose-monitoring.yml logs api
+docker-compose -f docker-compose-monitoring.yml logs prometheus
+docker-compose -f docker-compose-monitoring.yml logs grafana
+```
+
+### Step 8.5: Access and Test the API
+
+```powershell
+# Health check
+Invoke-RestMethod -Uri "http://localhost:8000/health"
+
+# Root endpoint
+Invoke-RestMethod -Uri "http://localhost:8000/"
+
+# Metrics endpoint (Prometheus format)
+Invoke-WebRequest -Uri "http://localhost:8000/metrics"
+
+# Prediction
+$body = @{
+    age=63; sex=1; cp=1; trestbps=145; chol=233; 
+    fbs=1; restecg=2; thalach=150; exang=0; 
+    oldpeak=2.3; slope=3; ca=0; thal=6
+} | ConvertTo-Json
+
+Invoke-RestMethod -Uri "http://localhost:8000/predict" -Method Post -Body $body -ContentType "application/json"
+```
+
+### Step 8.6: Access Prometheus
+
+1. Open **http://localhost:9090**
+2. Go to **Status → Targets**
+3. Verify API target is **UP**
+4. Example queries:
+   - `api_requests_total`
+   - `api_request_duration_seconds_sum`
+   - `predictions_total`
+   - `rate(api_requests_total[5m])`
+   - `prediction_duration_seconds_sum`
+
+### Step 8.7: Access Grafana
+
+1. Open **http://localhost:3000**
+2. Login:
+   - Username: `admin`
+   - Password: `admin`
+3. Skip or change password.
+
+### Step 8.8: Configure Grafana Dashboard
+
+**Verify Prometheus Data Source:**
+1. Go to **Connections (gear icon) → Data Sources**
+2. Select **Prometheus** (auto-provisioned)
+3. Click **Save & Test**
+
+**Import Dashboard:**
+1. Go to **Dashboards → Browse → Import**
+2. Click **Upload JSON file**
+3. Select `dashboards/api-dashboard.json` from `Part8`
+4. Choose **Prometheus** as the data source
+5. Click **Import**
+
+**Optional - Create Custom Dashboard:**
+Use queries like:
+- `rate(api_requests_total[5m])`
+- `api_request_duration_seconds_sum / api_request_duration_seconds_count`
+- `predictions_total`
+- `active_requests`
+
+### Step 8.9: Generate Traffic and View Metrics
+
+```powershell
+# Run 20 predictions
+for ($i=1; $i -le 20; $i++) {
+    $body = @{
+        age=63; sex=1; cp=1; trestbps=145; chol=233; 
+        fbs=1; restecg=2; thalach=150; exang=0; 
+        oldpeak=2.3; slope=3; ca=0; thal=6
+    } | ConvertTo-Json
+    
+    Invoke-RestMethod -Uri "http://localhost:8000/predict" -Method Post -Body $body -ContentType "application/json" | Out-Null
+    Write-Host "Request $i completed"
+    Start-Sleep -Milliseconds 500
+}
+```
+
+### Step 8.10: View Logs
+
+```powershell
+# Real-time logs
+docker-compose -f docker-compose-monitoring.yml logs -f api
+
+# Or from log file
+Get-Content logs\api.log -Tail 50
+```
+
+Each request log includes:
+- Timestamp
+- HTTP method and endpoint
+- Client IP
+- Status code
+- Duration
+- Prediction details (`/predict`)
+
+### Step 8.11: Recommended Screenshots
+
+1. `docker-compose ps` - 3 containers up
+2. API accessible at `http://localhost:8000/`
+3. Metrics at `http://localhost:8000/metrics`
+4. Prometheus at `http://localhost:9090`
+5. Prometheus scraping API (Targets page)
+6. Grafana at `http://localhost:3000`
+7. Dashboard configured
+8. Terminal showing API logs
+9. Successful prediction responses
 
 ---
 
-## Verification Checklist
+## Monitoring Metrics Available
 
-### Part 1
-- [ ] Raw data downloaded
-- [ ] Clean data created (`heart_clean.csv`)
-- [ ] Encoded data created (`heart_encoded.csv`)
-- [ ] EDA plots generated (3 figures)
+### Request Metrics
+- `api_requests_total{method, endpoint, status}` - Total requests
+- `api_request_duration_seconds{method, endpoint}` - Duration histogram
+- `active_requests` - Current active requests
 
-### Part 2
-- [ ] Logistic Regression trained
-- [ ] Random Forest trained
-- [ ] Models saved (`.joblib` files)
-- [ ] Metrics saved (JSON files)
-- [ ] Plots generated (confusion matrix, ROC curves)
+### Prediction Metrics
+- `predictions_total{prediction_class, risk_level}` - Total predictions
+- `prediction_duration_seconds` - Prediction time histogram
 
-### Part 3
-- [ ] MLflow UI accessible
-- [ ] Experiments tracked
-- [ ] Parameters logged
-- [ ] Metrics logged
-- [ ] Artifacts saved
-- [ ] Models registered (optional)
+### Model Metrics
+- `model_load_time_seconds` - Model load time
 
-### Part 4
-- [ ] Best model packaged
-- [ ] MLflow model format created
-- [ ] Schema saved
-- [ ] Inference tested
-- [ ] Predictions generated
-
-### Part 5 (Optional)
-- [ ] All tests pass
-- [ ] Coverage report generated
-
-### Part 6
-- [ ] API runs locally
-- [ ] API documentation accessible
-- [ ] Docker image built
-- [ ] Docker container tested
-
-### Part 7 & 8
-- [ ] See `Part8/DEPLOYMENT_STEPS.md` for checklist
+### Error Metrics
+- `api_errors_total{error_type, endpoint}` - Errors by type and endpoint
 
 ---
 
-## Common Issues & Solutions
+## Cleanup Commands
 
-### Issue: Module not found errors
+### Stop Monitoring Stack
+
 ```powershell
-# Make sure virtual environment is activated
-.\venv\Scripts\Activate.ps1
-
-# Reinstall dependencies
-pip install -r requirements.txt
+cd Part8
+docker-compose -f docker-compose-monitoring.yml down
 ```
 
-### Issue: MLflow UI not starting
-```powershell
-# Check if port 5000 is in use
-netstat -ano | findstr :5000
+### Stop and Clean Monitoring Stack (including volumes)
 
-# Use different port
-mlflow ui --port 5001
+```powershell
+docker-compose -f docker-compose-monitoring.yml down -v
 ```
 
-### Issue: Python script can't find modules
-```powershell
-# Run from project root
-cd "C:\Users\ashmitad\Documents\Personal\Bits\SEMESTER 3\MLOPs\Assignment 1\MLOP-Assign"
+### Stop Minikube Deployment
 
-# Or add to PYTHONPATH
-$env:PYTHONPATH = (Get-Location).Path
+```powershell
+kubectl delete -f Part7/k8s/deployment.yaml
+minikube stop
 ```
 
-### Issue: Docker build fails
-```powershell
-# Clean Docker cache
-docker system prune -a
+### Delete Minikube Cluster
 
-# Rebuild
-docker build --no-cache -t heart-disease-api:latest -f Part6/Dockerfile .
+```powershell
+minikube delete
 ```
+
+## Troubleshooting
+
+### API Container Constantly Restarting
+
+Fix path handling in `Part8/src/app_with_monitoring.py` (already applied in repo):
+- Use correct `PROJECT_ROOT`
+- Use `models/` instead of `Part4/models/`
+- Use `metrics/` instead of `Part4/metrics/`
+
+### Minikube Image Load Fails
+
+```powershell
+docker save heart-disease-api:latest | minikube image load -
+```
+
+### Pods Not Starting
+
+```powershell
+kubectl logs <pod-name>
+kubectl describe pod <pod-name>
+```
+
+### Docker Compose Fails to Start
+
+```powershell
+docker-compose -f docker-compose-monitoring.yml logs <service-name>
+docker-compose -f docker-compose-monitoring.yml build --no-cache
+docker-compose -f docker-compose-monitoring.yml up -d
+```
+
+### Prometheus Can't Scrape API
+
+- Check API container: `docker ps`
+- Check `Part8/config/prometheus.yml`
+- Ensure target is `api:8000`, not `localhost:8000`
+- Check network: `docker network ls`
+- Test `http://localhost:8000/metrics`
+
+### Grafana Can't Connect to Prometheus
+
+- Check Prometheus container: `docker ps`
+- Datasource URL must be `http://prometheus:9090`
+- Ensure both are on `monitoring` network
+
+## Key Files
+
+- `Part1/src/data_preprocess.py` - preprocessing
+- `Part2/src/train_models.py` - baseline training
+- `Part3/src/train_with_mlflow.py` - MLflow training
+- `Part4/src/package_model.py` - packaging
+- `Part4/src/infer.py` - batch inference
+- `Part5/tests/` - unit tests
+- `Part6/src/app.py` - FastAPI app
+- `Part6/Dockerfile` - API container
+- `Part7/k8s/deployment.yaml` - Kubernetes manifest
+- `Part8/docker-compose-monitoring.yml` - monitoring stack
+- `Part8/config/prometheus.yml` - Prometheus config
+- `Part8/config/grafana-datasource.yml` - Grafana datasource
+- `Part8/src/app_with_monitoring.py` - API with instrumentation
 
 ---
 
-## Quick Command Reference
+## Success Indicators
 
-### Virtual Environment
-```powershell
-# Activate
-.\venv\Scripts\Activate.ps1
+### Part 7 (Minikube)
 
-# Deactivate
-deactivate
-```
+- 3 pods running in Kubernetes
+- LoadBalancer service has external IP
+- API responds to `/health`
+- `/predict` returns expected JSON
 
-### Run All Parts Sequentially
-```powershell
-# Part 1
-cd Part1
-python dataset_download_script\download_data.py
-python src\data_preprocess.py
-python src\eda.py
+### Part 8 (Monitoring)
 
-# Part 2
-cd ..\Part2
-python src\train_models.py
+- 3 containers (API, Prometheus, Grafana) are healthy
+- API logs each request
+- Prometheus target is UP
+- Metrics visible via queries and Grafana dashboard
 
-# Part 3
-cd ..\Part3
-python src\train_with_mlflow.py
-
-# Part 4
-cd ..\Part4
-python src\package_model.py
-python src\infer.py
-
-# Part 6
-cd ..\Part6
-python src\app.py
-```
-
-### MLflow Commands
-```powershell
-# Start UI
-mlflow ui --port 5000
-
-# Start UI with specific backend
-mlflow ui --backend-store-uri file:///path/to/mlruns --port 5000
-
-# View experiments
-mlflow experiments list
-```
-
----
-
-## Time Estimates
-
-| Part | Task | Estimated Time |
-|------|------|----------------|
-| Part 1 | Data preprocessing & EDA | 5-10 minutes |
-| Part 2 | Model training | 5-10 minutes |
-| Part 3 | MLflow integration | 10-15 minutes |
-| Part 4 | Model packaging | 3-5 minutes |
-| Part 5 | Testing (optional) | 5-10 minutes |
-| Part 6 | API development | 10-15 minutes |
-| Part 7 | Kubernetes deployment | 15-20 minutes |
-| Part 8 | Monitoring setup | 10-15 minutes |
-| **Total** | | **60-100 minutes** |
-
----
-
-## Next Steps
-
-1. Complete Parts 1-6 using this guide
-2. Proceed to `Part8/DEPLOYMENT_STEPS.md` for Steps 7 & 8
-3. Follow `Part8/SCREENSHOT_GUIDE.md` for documentation
-4. Use `Part8/POWERSHELL_COMMANDS.md` for testing
-
----
-
-For questions or issues, refer to the troubleshooting sections in each part's README or the main DEPLOYMENT_STEPS.md file.
-
+Deployment and monitoring completed successfully.

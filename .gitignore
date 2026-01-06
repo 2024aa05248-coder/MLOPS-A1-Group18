@@ -43,9 +43,15 @@ mlartifacts/
 
 # Model outputs and artifacts
 Part2/outputs/
+Part3/mlruns/
 Part3/outputs/
+Part3/mlflow.db
 Part4/models/
 Part4/metrics/
+Part4/outputs/
+Part4/plots/
+Part5/htmlcov/
+Part5/.coverage
 
 # Jupyter
 .ipynb_checkpoints/
