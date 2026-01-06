@@ -1,18 +1,18 @@
 # Part 2 — Feature Engineering & Model Development
 
-Scope
+## Scope
 - Prepare final ML features (scaling + encoding)
 - Train and tune at least two classifiers (Logistic Regression, Random Forest)
 - Evaluate with stratified cross-validation using accuracy, precision, recall, ROC-AUC
 - Save metrics, plots, and best models
 
-Prerequisites
+## Prerequisites
 - Complete Part 1 to generate the interim dataset:
   - Part1/data/interim/heart_clean.csv
 - Install dependencies at the project root:
-  - python3 -m pip install -r requirements.txt
+  - pip install -r requirements.txt
 
-Project Structure
+## Project Structure
 - Part2/src/features.py
   - Loads Part1 interim data, defines feature groups
   - ColumnTransformer:
@@ -27,22 +27,26 @@ Project Structure
   - Out-of-fold ROC curves
   - Saves artifacts to Part2/outputs
 
-How to Run
-From repository root (mlops-heart-disease):
+## How to Run
+From repository root:
 
-1) Ensure Part 1 data exists
-- If you haven’t run Part 1 after the folder reorg, do:
-  python3 Part1/scripts/download_data.py
-  python3 Part1/src/data_preprocess.py
+### 1) Ensure Part 1 Data Exists
+```bash
+# If you haven't run Part 1, execute:
+python Part1/dataset_download_script/download_data.py
+python Part1/src/data_preprocess.py
+```
 
 This will create:
-- Part1/data/interim/heart_clean.csv
+- `Part1/data/interim/heart_clean.csv`
 
-2) Train models and generate metrics/artifacts
-- Run Part 2 training (as a module so relative imports resolve):
-  python3 Part2/src/train_models.py
+### 2) Train Models and Generate Metrics/Artifacts
+```bash
+# Run Part 2 training:
+python Part2/src/train_models.py
+```
 
-Outputs
+## Outputs
 - Part2/outputs/metrics/
   - logreg_cv_metrics.json
   - rf_cv_metrics.json
@@ -54,7 +58,7 @@ Outputs
   - logreg_best.joblib
   - rf_best.joblib
 
-Notes:
+## Notes
 - Feature groups (features.py):
   - Continuous numeric (scaled): age, trestbps, chol, thalach, oldpeak, ca
   - Binary numeric (passthrough): sex, fbs, exang
@@ -65,3 +69,7 @@ Notes:
 - Cross-validation:
   - StratifiedKFold with 5 splits, shuffle=True, random_state=42
   - Metrics computed via cross_validate; OOF ROC via cross_val_predict
+
+## Next Steps
+
+Proceed to Part 3: MLflow Experiment Tracking and Model Registry

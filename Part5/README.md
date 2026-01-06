@@ -149,3 +149,7 @@ Each failure includes:
 - Integration tests check actual model files from Part2 and Part4
 - Pipeline uses job dependencies: lint → test → train (sequential execution)
 
+## Next Steps
+
+Proceed to Part 6: REST API Development with FastAPI
+

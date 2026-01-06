@@ -175,10 +175,8 @@ sum by (risk_level) (predictions_total)
    - Save & Test
 
 4. **Import Dashboard**:
-   - Go to Create → Import
-   - Upload `dashboards/api-dashboard.json`
-   - Select Prometheus data source
-   - Import
+   - **Automatic**: Dashboard is auto-provisioned on startup (check Dashboards → Browse)
+   - **Manual**: Go to Create → Import, upload `dashboards/api-dashboard.json`, select Prometheus data source, and Import
 
 ### Dashboard Panels
 

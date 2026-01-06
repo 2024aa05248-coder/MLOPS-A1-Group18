@@ -1,13 +1,13 @@
 # Part 3 — Experiment Tracking with MLflow
 
-Scope
+## Scope
 - Integrate MLflow for experiment tracking (parameters, metrics, artifacts, models).
 - Reuse Part 2 preprocessing and training utilities (no code duplication).
 - Train and track two models:
   - Logistic Regression
   - Random Forest
 
-Code Flow and outputs
+## Code Flow and Outputs
 - Part3/src/train_with_mlflow.py now imports training/evaluation helpers directly from Part2:
   - from Part2.src.train_models import CV, run_grid_search, evaluate_cv, plot_roc_oof, save_confusion_matrix
 - Part 3 focuses only on:
@@ -16,13 +16,13 @@ Code Flow and outputs
   - Logging params/metrics/artifacts/model to MLflow
   - Writing Part 3 artifacts under Part3/outputs
 
-Prerequisites
+## Prerequisites
 - Complete Part 1 to generate the interim dataset:
   - Part1/data/interim/heart_clean.csv
 - Install dependencies at repo root:
-  - python3 -m pip install -r requirements.txt
+  - pip install -r requirements.txt
 
-Project Structure
+## Project Structure
 - Part3/src/train_with_mlflow.py
   - Loads Part1 interim data
   - Reuses Part2/src/features.py preprocessing (columns logged as params)
@@ -34,27 +34,30 @@ Project Structure
     - Model: logged via mlflow.sklearn.log_model
   - MLflow local file store: Part3/mlruns
 
-How to Run
+## How to Run
 From the repository root:
 
-1) Ensure Part 1 artifacts exist
-- If not already done:
-  python Part1/scripts/download_data.py
-  python Part1/src/data_preprocess.py
+### 1) Ensure Part 1 Artifacts Exist
+```bash
+# If not already done:
+python Part1/dataset_download_script/download_data.py
+python Part1/src/data_preprocess.py
+```
 
 This creates:
-- Part1/data/interim/heart_clean.csv
+- `Part1/data/interim/heart_clean.csv`
 
-2) Run Part 3 with MLflow tracking
-- As a module (recommended):
-  python Part3/src/train_with_mlflow
+### 2) Run Part 3 with MLflow Tracking
+```bash
+python Part3/src/train_with_mlflow.py
+```
 
-MLflow UI
+## MLflow UI
 - Start the UI from repo root:
   mlflow ui --backend-store-uri file://$(pwd)/Part3/mlruns
 - Open http://127.0.0.1:5000
 
-Outputs
+## Outputs
 - Part3/mlruns/                # MLflow tracking data (experiments/runs)
 - Part3/outputs/metrics/
   - logreg_mlflow_report.json
@@ -66,3 +69,7 @@ Outputs
   - logreg_best.joblib
   - rf_best.joblib
 
+
+## Next Steps
+
+Proceed to Part 4: Model Packaging and Inference

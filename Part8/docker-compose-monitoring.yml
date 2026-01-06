@@ -48,7 +48,8 @@ services:
     volumes:
       - grafana-data:/var/lib/grafana
       - ./config/grafana-datasource.yml:/etc/grafana/provisioning/datasources/datasource.yml
-      - ./dashboards:/etc/grafana/provisioning/dashboards
+      - ./dashboards/dashboards.yml:/etc/grafana/provisioning/dashboards/dashboards.yml
+      - ./dashboards/api-dashboard.json:/etc/grafana/provisioning/dashboards/api-dashboard.json
     networks:
       - monitoring
     restart: unless-stopped

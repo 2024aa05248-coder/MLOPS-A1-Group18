@@ -50,7 +50,7 @@ def get_paths() -> Dict[str, Path]:
 def grid_logreg() -> Dict[str, List[Any]]:
     return {
         "clf__solver": ["liblinear"],
-        "clf__penalty": ["l2"],
+        "clf__l1_ratio": [0.0],  # 0.0 = L2 only (equivalent to old penalty='l2')
         "clf__C": [0.01, 0.1, 1.0, 10.0, 100.0],
         "clf__max_iter": [1000],
         "clf__class_weight": [None, "balanced"],

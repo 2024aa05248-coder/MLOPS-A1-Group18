@@ -254,3 +254,8 @@ docker logs heart-disease-api
 ### Import Errors
 Ensure all dependencies are in requirements.txt and installed in container.
 
+
+## Next Steps
+
+Proceed to Part 7: Kubernetes Deployment and Orchestration
+

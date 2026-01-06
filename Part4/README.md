@@ -1,6 +1,6 @@
 # Part 4 — Model Packaging & Reproducibility
 
-Scope
+## Scope
 - Train, select, and package a final model with full preprocessing to ensure end-to-end reproducibility.
 - Persist artifacts in reusable formats:
   - Joblib pipeline (preprocessing + estimator)
@@ -9,7 +9,7 @@ Scope
 - Provide clean, pinned environment files for deterministic installs.
 - Provide an inference script that consumes raw features identical to Part 1 output without target.
 
-Artifacts Produced
+## Artifacts Produced
 - Part4/models/final_model.joblib         # scikit-learn Pipeline (ColumnTransformer + estimator)
 - Part4/models/mlflow_model/              # MLflow pyfunc model directory
 - Part4/models/schema.json                # transformed feature names + feature groups metadata
@@ -20,19 +20,20 @@ Artifacts Produced
 - Part4/src/infer.py                      # CLI for batch inference on CSV
 - Part4/src/package_model.py              # trains, selects, and writes above artifacts
 
-Prerequisites
+## Prerequisites
 - Part 1 generated the interim dataset:
   - Part1/data/interim/heart_clean.csv
 
-How to Package (from repo root)
+## How to Package
 1) Ensure Part 1 artifacts exist:
    python3 Part1/scripts/download_data.py
    python3 Part1/src/data_preprocess.py
 
 2) Run packaging:
     - python3 Part4/src/package_model.py
+```
 
-What Packaging Does
+## What Packaging Does
 - Trains Logistic Regression and Random Forest using the same Part 2 preprocessing (scaling + one-hot).
 - Performs 5-fold Stratified CV and computes:
   - accuracy, precision, recall, ROC-AUC (mean and std)
@@ -44,7 +45,7 @@ What Packaging Does
   - schema.json with transformed feature names and groups
   - final_report.json capturing metrics and selection details
 
-Reproducibility:
+## Reproducibility
 - The saved joblib pipeline contains:
   - ColumnTransformer: 
     - StandardScaler on continuous numeric: age, trestbps, chol, thalach, oldpeak, ca
@@ -53,19 +54,30 @@ Reproducibility:
   - Estimator: chosen between Logistic Regression and Random Forest
 - schema.json documents ColumnTransformer output feature names and original groups.
 
-Inference
-- Prepare a CSV of raw features (no target). For a quick sample from Part 1:
-  python3 - <<'PY'
+## Inference
+
+### Generate Sample Input CSV
+```bash
+python << 'EOF'
 import os, pandas as pd
 os.makedirs('Part4/inputs', exist_ok=True)
 df = pd.read_csv('Part1/data/interim/heart_clean.csv')
 df.drop(columns=['target']).head(20).to_csv('Part4/inputs/sample_X.csv', index=False)
 print('Wrote Part4/inputs/sample_X.csv')
-PY
+EOF
+```
 
-- Run inference (joblib model by default):
-  python3 Part4/src/infer.py --input Part4/inputs/sample_X.csv
-  # Output written to Part4/outputs/predictions.csv (columns: original features + prediction)
+### Run Inference with Joblib Model
+```bash
+python Part4/src/infer.py --input Part4/inputs/sample_X.csv
+```
+Output written to `Part4/outputs/predictions.csv` (columns: original features + prediction)
 
-- Use MLflow model directory (pyfunc):
-  python3 Part4/src/infer.py --input Part4/inputs/sample_X.csv --mlflow-model-dir Part4/models/mlflow_model
+### Run Inference with MLflow Model
+```bash
+python Part4/src/infer.py --input Part4/inputs/sample_X.csv --mlflow-model-dir Part4/models/mlflow_model
+```
+
+## Next Steps
+
+Proceed to Part 5: Testing and Quality Assurance

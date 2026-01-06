@@ -30,7 +30,8 @@ This guide provides step-by-step instructions to complete the entire MLOps assig
 
 **Step 1: Clone/Navigate to Project Directory**
 ```powershell
-cd "C:\Users\ashmitad\Documents\Personal\Bits\SEMESTER 3\MLOPs\Assignment 1\MLOP-Assign"
+cd "<path-to-your-project-directory>"
+# Example: cd "C:\Projects\MLOP-Assign"
 ```
 
 **Step 2: Create Virtual Environment**
@@ -73,23 +74,10 @@ cd Part1
 python dataset_download_script\download_data.py
 ```
 
-**Expected Output:**
-- `data/raw/processed.cleveland.data` created
-
 ### Step 1.2: Data Preprocessing
 
 ```powershell
 python src\data_preprocess.py
-```
-
-**Expected Output:**
-```
-✓ Loaded 303 rows from raw data
-✓ Cleaned dataset: 297 rows
-✓ Saved to data/interim/heart_clean.csv
-✓ Encoded dataset: 297 rows, 23 features
-✓ Saved to data/processed/heart_encoded.csv
-✓ Feature names saved to data/processed/feature_names.json
 ```
 
 **Verify Files Created:**
@@ -103,11 +91,6 @@ ls data\processed\
 ```powershell
 python src\eda.py
 ```
-
-**Expected Output:**
-- `reports/figures/histograms_numeric.png`
-- `reports/figures/corr_heatmap.png`
-- `reports/figures/class_balance.png`
 
 **View Generated Plots:**
 ```powershell
@@ -143,23 +126,6 @@ cd ..\Part2
 
 ```powershell
 python src\train_models.py
-```
-
-**Expected Output:**
-```
-Training Logistic Regression...
-  Best params: {'clf__C': 0.1, 'clf__penalty': 'l2', ...}
-  Best CV ROC-AUC: 0.8XX
-  OOF ROC-AUC: 0.8XX
-  ✓ Saved model to outputs/models/logreg_best.joblib
-
-Training Random Forest...
-  Best params: {'clf__max_depth': 10, 'clf__n_estimators': 200, ...}
-  Best CV ROC-AUC: 0.8XX
-  OOF ROC-AUC: 0.8XX
-  ✓ Saved model to outputs/models/rf_best.joblib
-
-Summary saved to outputs/metrics/scores_summary.csv
 ```
 
 **Training Time:** 2-5 minutes depending on your machine.
@@ -229,27 +195,6 @@ mlflow ui --port 5000
 python src\train_with_mlflow.py
 ```
 
-**Expected Output:**
-```
-Starting MLflow experiment: Heart Disease Classification
-MLflow tracking URI: file:///.../Part3/mlruns
-
-Training Logistic Regression with MLflow...
-  Logged params: C, penalty, solver, class_weight
-  Logged metrics: accuracy_mean, precision_mean, recall_mean, roc_auc_mean
-  Logged artifacts: confusion matrix, ROC curve, metrics JSON
-  ✓ Run ID: abc123...
-
-Training Random Forest with MLflow...
-  Logged params: n_estimators, max_depth, min_samples_leaf
-  Logged metrics: accuracy_mean, precision_mean, recall_mean, roc_auc_mean
-  Logged artifacts: confusion matrix, ROC curve, metrics JSON
-  ✓ Run ID: def456...
-
-✓ Experiment completed!
-✓ View results at: http://localhost:5000
-```
-
 **Training Time:** 3-7 minutes.
 
 ### Step 3.4: View MLflow Experiments
@@ -317,18 +262,6 @@ cd ..\Part4
 python src\package_model.py
 ```
 
-**Expected Output:**
-```
-Packaging best model from Part3...
-✓ Loaded model: RandomForestClassifier
-✓ Model saved to: models/final_model.joblib
-✓ MLflow model saved to: models/mlflow_model/
-✓ Schema saved to: models/schema.json
-✓ Metadata saved to: metrics/final_report.json
-
-Model packaging complete!
-```
-
 ### Step 4.3: Verify Packaged Model
 
 ```powershell
@@ -345,26 +278,7 @@ ls models\mlflow_model\
 ### Step 4.4: Test Inference
 
 ```powershell
-python src\infer.py
-```
-
-**Expected Output:**
-```
-Loading model from: models/final_model.joblib
-✓ Model loaded successfully
-
-Loading test data from: inputs/sample_X.csv
-✓ Loaded 10 samples
-
-Running inference...
-✓ Predictions completed
-
-Sample predictions:
-  Patient 1: Class 0 (Probability: 0.65)
-  Patient 2: Class 1 (Probability: 0.78)
-  ...
-
-✓ Predictions saved to: outputs/predictions.csv
+python src\infer.py --input inputs\sample_X.csv
 ```
 
 ### Step 4.5: View Predictions
@@ -375,10 +289,9 @@ Get-Content outputs\predictions.csv
 
 ### Step 4.6: Custom Inference Test
 
-Create a test file `test_patient.csv`:
-```csv
-age,sex,cp,trestbps,chol,fbs,restecg,thalach,exang,oldpeak,slope,ca,thal
-63,1,1,145,233,1,2,150,0,2.3,3,0,6
+#### Create a test file `test_patient.csv`:
+```powershell
+"age,sex,cp,trestbps,chol,fbs,restecg,thalach,exang,oldpeak,slope,ca,thal`n63,1,1,145,233,1,2,150,0,2.3,3,0,6" | Out-File -FilePath test_patient.csv -Encoding utf8
 ```
 
 Run inference:
@@ -403,16 +316,6 @@ cd ..\Part5
 
 ```powershell
 pytest tests\ -v
-```
-
-**Expected Output:**
-```
-tests/test_data_preprocessing.py::test_load_data PASSED
-tests/test_features.py::test_feature_engineering PASSED
-tests/test_model.py::test_model_training PASSED
-tests/test_inference.py::test_inference PASSED
-
-========== 4 passed in 2.34s ==========
 ```
 
 ### Step 5.3: Run Tests with Coverage
@@ -545,20 +448,20 @@ Part 8: Monitoring (Prometheus + Grafana + Logging)
 
 ## Verification Checklist
 
-### Part 1 ✓
+### Part 1
 - [ ] Raw data downloaded
 - [ ] Clean data created (`heart_clean.csv`)
 - [ ] Encoded data created (`heart_encoded.csv`)
 - [ ] EDA plots generated (3 figures)
 
-### Part 2 ✓
+### Part 2
 - [ ] Logistic Regression trained
 - [ ] Random Forest trained
 - [ ] Models saved (`.joblib` files)
 - [ ] Metrics saved (JSON files)
 - [ ] Plots generated (confusion matrix, ROC curves)
 
-### Part 3 ✓
+### Part 3
 - [ ] MLflow UI accessible
 - [ ] Experiments tracked
 - [ ] Parameters logged
@@ -566,24 +469,24 @@ Part 8: Monitoring (Prometheus + Grafana + Logging)
 - [ ] Artifacts saved
 - [ ] Models registered (optional)
 
-### Part 4 ✓
+### Part 4
 - [ ] Best model packaged
 - [ ] MLflow model format created
 - [ ] Schema saved
 - [ ] Inference tested
 - [ ] Predictions generated
 
-### Part 5 ✓ (Optional)
+### Part 5 (Optional)
 - [ ] All tests pass
 - [ ] Coverage report generated
 
-### Part 6 ✓
+### Part 6
 - [ ] API runs locally
 - [ ] API documentation accessible
 - [ ] Docker image built
 - [ ] Docker container tested
 
-### Part 7 & 8 ✓
+### Part 7 & 8
 - [ ] See `Part8/DEPLOYMENT_STEPS.md` for checklist
 
 ---
@@ -697,14 +600,12 @@ mlflow experiments list
 
 ## Next Steps
 
-1. ✅ Complete Parts 1-6 using this guide
-2. ✅ Proceed to `Part8/DEPLOYMENT_STEPS.md` for Steps 7 & 8
-3. ✅ Follow `Part8/SCREENSHOT_GUIDE.md` for documentation
-4. ✅ Use `Part8/POWERSHELL_COMMANDS.md` for testing
+1. Complete Parts 1-6 using this guide
+2. Proceed to `Part8/DEPLOYMENT_STEPS.md` for Steps 7 & 8
+3. Follow `Part8/SCREENSHOT_GUIDE.md` for documentation
+4. Use `Part8/POWERSHELL_COMMANDS.md` for testing
 
 ---
-
-**Good luck with your MLOps assignment! 🚀**
 
 For questions or issues, refer to the troubleshooting sections in each part's README or the main DEPLOYMENT_STEPS.md file.
 

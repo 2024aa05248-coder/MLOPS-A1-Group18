@@ -20,7 +20,8 @@ This guide will help you configure all necessary values and run the complete pro
 
 ```bash
 # Navigate to your project directory
-cd "c:\Users\ashmitad\Documents\Personal\Bits\SEMESTER 3\MLOPs\Assignment 1\MLOP-Assign"
+cd "<path-to-your-project-directory>"
+# Example: cd "C:\Projects\MLOP-Assign"
 
 # Initialize git (if not already done)
 git init
@@ -125,7 +126,8 @@ image: YOUR_DOCKERHUB_USERNAME/heart-disease-api:latest
 
 ```bash
 # 1. Navigate to project directory
-cd "c:\Users\ashmitad\Documents\Personal\Bits\SEMESTER 3\MLOPs\Assignment 1\MLOP-Assign"
+cd "<path-to-your-project-directory>"
+# Example: cd "C:\Projects\MLOP-Assign"
 
 # 2. Create virtual environment
 python -m venv venv
@@ -172,7 +174,8 @@ mlflow ui --backend-store-uri file://$(pwd)/Part3/mlruns
 
 ```bash
 # Navigate to project
-cd "c:\Users\ashmitad\Documents\Personal\Bits\SEMESTER 3\MLOPs\Assignment 1\MLOP-Assign"
+cd "<path-to-your-project-directory>"
+# Example: cd "C:\Projects\MLOP-Assign"
 
 # Activate virtual environment
 venv\Scripts\activate
@@ -201,7 +204,8 @@ curl http://localhost:8000/health
 
 ```bash
 # 1. Build Docker image
-cd "c:\Users\ashmitad\Documents\Personal\Bits\SEMESTER 3\MLOPs\Assignment 1\MLOP-Assign"
+cd "<path-to-your-project-directory>"
+# Example: cd "C:\Projects\MLOP-Assign"
 docker build -t heart-disease-api:latest -f Part6/Dockerfile .
 
 # 2. Run container
@@ -227,7 +231,8 @@ docker rm heart-disease-api
 
 ```bash
 # Navigate to Part8
-cd "c:\Users\ashmitad\Documents\Personal\Bits\SEMESTER 3\MLOPs\Assignment 1\MLOP-Assign\Part8"
+cd "<path-to-your-project-directory>\Part8"
+# Example: cd "C:\Projects\MLOP-Assign\Part8"
 
 # Start all services
 docker-compose -f docker-compose-monitoring.yml up -d
@@ -258,7 +263,8 @@ minikube start --cpus=4 --memory=8192
 minikube addons enable metrics-server
 
 # 2. Build and load image
-cd "c:\Users\ashmitad\Documents\Personal\Bits\SEMESTER 3\MLOPs\Assignment 1\MLOP-Assign"
+cd "<path-to-your-project-directory>"
+# Example: cd "C:\Projects\MLOP-Assign"
 docker build -t heart-disease-api:latest -f Part6/Dockerfile .
 minikube image load heart-disease-api:latest
 
