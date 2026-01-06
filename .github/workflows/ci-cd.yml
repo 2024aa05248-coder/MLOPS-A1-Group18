@@ -43,16 +43,6 @@ jobs:
           echo "ERROR: Flake8 found linting errors!"
           exit 1
         }
-    
-    # - name: Check code formatting with black
-    #   run: |
-    #     echo "=== Checking code formatting with black ==="
-    #     black --check Part1 Part2 Part3 Part4 Part5 --line-length=120 || {
-    #       echo "ERROR: Black found formatting issues!"
-    #       echo "Run 'black Part1 Part2 Part3 Part4 Part5 --line-length=120' to fix"
-    #       exit 1
-    #     }
-
   test:
     name: Unit Tests
     runs-on: ubuntu-latest
