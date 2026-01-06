@@ -352,8 +352,5 @@ This project is for educational purposes as part of MLOps coursework.
 
 ---
 
-
----
-
 **Built by Group18**
 
